@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Code Search</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_search_result">Search Result</string>
+    <string name="view_location">View Location</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="placeholder">This is a placeholder</string>
+    <string name="owner">Owner:</string>
+    <string name="updated">Updated:</string>
+    <string name="title_activity_web_view">WebView</string>
+</resources>

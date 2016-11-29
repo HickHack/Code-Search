@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_result"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:weightSum="1"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="graham.com.codesearch.ResultActivity"
+    tools:showIn="@layout/activity_result">
+
+    <!-- Repo Image -->
+    <ImageView
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/projectImage"
+        android:layout_weight="0.05" />
+
+
+    <!-- Description -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repoDescription"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:text="@string/placeholder"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/table_row_margin"
+        android:layout_weight="0.05"/>
+
+
+    <!-- Owner Name -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ownerNameTitle"
+            android:layout_weight="0.05"
+            android:layout_marginRight="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="@string/owner"/>
+
+
+        <TextView
+            android:text="@string/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:id="@+id/ownerName" />
+    </LinearLayout>
+
+    <!-- Repo Name -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repoNameTitle"
+            android:layout_weight="0.05"
+            android:layout_marginRight="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Repo Name:" />
+
+
+
+        <TextView
+            android:text="@string/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/text_margin"
+            android:id="@+id/repoName" />
+    </LinearLayout>
+
+    <!-- Repo Name -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastUpdateTitle"
+            android:layout_weight="0.05"
+            android:layout_marginRight="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="@string/updated" />
+
+
+
+        <TextView
+            android:text="@string/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/text_margin"
+            android:id="@+id/lastUpdated" />
+    </LinearLayout>
+
+</LinearLayout>
