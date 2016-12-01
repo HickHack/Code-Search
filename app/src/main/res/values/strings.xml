@@ -5,11 +5,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_search_result">Search Result</string>
+    <string name="title_activity_search_result">Search</string>
     <string name="view_location">View Location</string>
-    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_result">Result</string>
     <string name="placeholder">This is a placeholder</string>
     <string name="owner">Owner:</string>
     <string name="updated">Updated:</string>
     <string name="title_activity_web_view">WebView</string>
+    <string name="title_activity_browser">Browser</string>
+    <string name="created">Created:</string>
+    <string name="message_body" formatted="false">Hey, I found an awesome repository on Code Search called %s. You should check it out at %s</string>
 </resources>

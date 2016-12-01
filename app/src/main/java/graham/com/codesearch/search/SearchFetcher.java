@@ -1,5 +1,7 @@
 package graham.com.codesearch.search;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,6 +18,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import graham.com.codesearch.R;
+import graham.com.codesearch.search.model.Repo;
+import graham.com.codesearch.search.model.Results;
 
 /**
  * Created by Graham Murray on 16/11/16.
@@ -49,6 +53,7 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     @Override
     protected void onPostExecute(Results results) {
         super.onPostExecute(results);
+        generateNotification(results.getRepos().size());
         progress.dismiss();
         populateResultList(results);
     }
@@ -129,4 +134,19 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
         adapter = new CustomAdapter(context, R.layout.listview_search_item, results.getRepos());
         listView.setAdapter(adapter);
     }
+
+    private void generateNotification(int numberResults) {
+        String title = "Search Complete";
+        String body = numberResults + " Results Retrieved";
+        String subject = "Code Search";
+
+        NotificationManager notif = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notify= new Notification.Builder(context).setContentTitle(title)
+                                    .setContentText(body).setContentTitle(subject)
+                                        .setSmallIcon(R.drawable.ic_github_white).build();
+
+        notify.flags |= Notification.FLAG_AUTO_CANCEL;
+        notif.notify(0, notify);
+    }
+
 }

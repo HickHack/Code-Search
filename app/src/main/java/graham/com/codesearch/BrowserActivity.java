@@ -1,9 +1,9 @@
 package graham.com.codesearch;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -15,8 +15,9 @@ public class BrowserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_view);
+        setContentView(R.layout.activity_browser);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_close);
         setSupportActionBar(toolbar);
 
         this.url = (String) getIntent().getExtras().get("url");
@@ -25,13 +26,19 @@ public class BrowserActivity extends AppCompatActivity {
         navigateToSite();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+
+        return false;
+    }
+
     private void configureBrowser() {
         browser = (WebView) findViewById(R.id.webView);
 
         browser.getSettings().setJavaScriptEnabled(true);
         browser.getSettings().setLoadsImagesAutomatically(true);
         browser.getSettings().setJavaScriptEnabled(true);
-        browser.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         browser.setWebViewClient(new GitWebViewClient());
     }
 

@@ -32,7 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BrowserActivity"
-            android:label="@string/title_activity_web_view"
+            android:label="@string/title_activity_browser"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

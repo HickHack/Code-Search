@@ -27,13 +27,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/repoDescription"
-        android:paddingLeft="10sp"
-        android:paddingRight="10sp"
+        android:paddingLeft="@dimen/description_margin"
+        android:paddingRight="@dimen/description_margin"
         android:text="@string/placeholder"
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/table_row_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_weight="0.05"/>
 
+    <View
+        android:layout_width="@dimen/line_width"
+        android:layout_height="1dp"
+        android:layout_marginBottom="2sp"
+        android:layout_marginTop="@dimen/line_margin"
+        android:background="@android:color/darker_gray"/>
 
     <!-- Owner Name -->
     <LinearLayout
@@ -49,6 +56,7 @@
             android:layout_weight="0.05"
             android:layout_marginRight="@dimen/text_margin"
             android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/owner"/>
 
 
@@ -56,9 +64,17 @@
             android:text="@string/placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/text_margin"
             android:id="@+id/ownerName" />
     </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/line_width"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/line_margin"
+        android:layout_marginBottom="@dimen/line_margin_top"
+        android:background="@android:color/darker_gray"/>
 
     <!-- Repo Name -->
     <LinearLayout
@@ -72,9 +88,43 @@
             android:layout_height="wrap_content"
             android:id="@+id/repoNameTitle"
             android:layout_weight="0.05"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginRight="@dimen/text_margin"
             android:textStyle="bold"
             android:text="Repo Name:" />
+
+        <TextView
+            android:text="@string/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginRight="@dimen/text_margin"
+            android:id="@+id/repoName" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/line_width"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/line_margin_top"
+        android:layout_marginTop="@dimen/line_margin"
+        android:background="@android:color/darker_gray"/>
+
+    <!-- Created -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createdTitle"
+            android:layout_weight="0.05"
+            android:layout_marginRight="@dimen/text_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:text="@string/created" />
 
 
 
@@ -83,10 +133,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/text_margin"
-            android:id="@+id/repoName" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/created" />
     </LinearLayout>
 
-    <!-- Repo Name -->
+    <View
+        android:layout_width="@dimen/line_width"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/line_margin"
+        android:layout_marginBottom="@dimen/line_margin_top"
+        android:background="@android:color/darker_gray"/>
+
+    <!-- Last Updated -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,6 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lastUpdateTitle"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_weight="0.05"
             android:layout_marginRight="@dimen/text_margin"
             android:textStyle="bold"
@@ -108,8 +167,15 @@
             android:text="@string/placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginRight="@dimen/text_margin"
             android:id="@+id/lastUpdated" />
     </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/line_width"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/line_margin"
+        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>

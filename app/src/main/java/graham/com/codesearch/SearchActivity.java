@@ -12,14 +12,14 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ListView;
-import graham.com.codesearch.search.Repo;
-import graham.com.codesearch.search.Results;
+import graham.com.codesearch.search.model.Repo;
 import graham.com.codesearch.search.SearchFetcher;
 
 public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ListView listView;
     private SearchView searchView;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,15 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listView = (ListView) findViewById(R.id.listView);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
 
         //Search View Menu Inflation
         getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -45,6 +48,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         getMenuInflater().inflate(R.menu.list_menu, menu);
 
         return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+
+        return false;
     }
 
     @Override
@@ -65,6 +75,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @Override
     public boolean onQueryTextSubmit(String query) {
         setupListViewItemClick();
+        searchView.clearFocus();
 
         SearchFetcher fetcher = new SearchFetcher(this, listView);
         fetcher.execute(query);
@@ -89,4 +100,5 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
             }
         });
     }
+
 }

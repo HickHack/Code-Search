@@ -3,6 +3,7 @@ package graham.com.codesearch;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import graham.com.codesearch.search.Repo;
+import graham.com.codesearch.search.model.Repo;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class ResultActivity extends AppCompatActivity {
     private TextView descriptionTextView;
     private TextView repoNameTextView;
     private TextView repoOwnerTextView;
+    private TextView createdTextView;
     private TextView updatedTextView;
 
     @Override
@@ -28,15 +30,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fabText = (FloatingActionButton) findViewById(R.id.fabText);
-        fabText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Tell a friend", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Repo result = (Repo) getIntent().getSerializableExtra("result");
 
@@ -47,9 +42,18 @@ public class ResultActivity extends AppCompatActivity {
             setupDescriptionTextView();
             setupRepoNameTextView();
             setupOwnerNameTextView();
+            setupCreatedTextView();
             setupUpdatedTextView();
             configureBrowserFab();
+            configureMessageFab();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+
+        return false;
     }
 
     private void setupImage() {
@@ -76,6 +80,10 @@ public class ResultActivity extends AppCompatActivity {
         repoOwnerTextView.setText(result.getOwner().getUsername());
     }
 
+    private void setupCreatedTextView() {
+        createdTextView = (TextView) findViewById(R.id.created);
+        createdTextView.setText(result.getCreated());
+    }
     private void setupUpdatedTextView() {
         updatedTextView = (TextView) findViewById(R.id.lastUpdated);
         updatedTextView.setText(result.getUpdated());
@@ -86,11 +94,38 @@ public class ResultActivity extends AppCompatActivity {
         fabBrowser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
-                intent.putExtra("url", result.getOwner().getHtmlUrl());
-                startActivity(intent);
+                launchBrowser();
             }
         });
+    }
+
+    private void launchBrowser() {
+        Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
+        intent.putExtra("url", result.getProfileUrl());
+        startActivity(intent);
+    }
+
+    private void configureMessageFab() {
+        FloatingActionButton fabText = (FloatingActionButton) findViewById(R.id.fabText);
+        fabText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchMessageService();
+            }
+        });
+    }
+
+    private void launchMessageService() {
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+        sendIntent.setData(Uri.parse("sms:"));
+        sendIntent.putExtra("sms_body", getMessageBody());
+        startActivity(sendIntent);
+    }
+
+    private String getMessageBody() {
+        String body = getResources().getString(R.string.message_body);
+
+        return String.format(body, result.getName(), result.getProfileUrl());
     }
 
 }

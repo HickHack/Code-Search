@@ -1,4 +1,4 @@
-package graham.com.codesearch.search;
+package graham.com.codesearch.search.model;
 
 import com.google.gson.annotations.SerializedName;
 

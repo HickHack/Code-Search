@@ -1,7 +1,4 @@
-package graham.com.codesearch.search;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package graham.com.codesearch.search.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -31,11 +28,11 @@ public class Repo implements Serializable {
     }
 
     public String getCreated() {
-        return created;
+        return cleanDate(created);
     }
 
     public String getUpdated() {
-        return updated;
+        return cleanDate(updated);
     }
 
     public String getProfileUrl() {
@@ -48,6 +45,14 @@ public class Repo implements Serializable {
 
     public Owner getOwner() {
         return owner;
+    }
+
+    private String cleanDate(String data) {
+        String[] exploded = data.split("T");
+        String date = exploded[0];
+        String time = exploded[1].split("Z")[0];
+
+        return date + " " + time;
     }
 
 }
