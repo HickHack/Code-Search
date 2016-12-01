@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import graham.com.codesearch.R;
+import graham.com.codesearch.SearchActivity;
 import graham.com.codesearch.search.model.Repo;
 import graham.com.codesearch.search.model.Results;
 
@@ -32,11 +33,13 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     private InputStream inputStream;
     private ProgressDialog progress;
     private Context context;
+    private SearchActivity activity;
     private ListView listView;
     private CustomAdapter adapter;
 
-    public SearchFetcher(Context context, ListView listView) {
+    public SearchFetcher(Context context, SearchActivity activity, ListView listView) {
         this.context = context;
+        this.activity = activity;
         this.listView = listView;
     }
 
@@ -73,17 +76,19 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
             urlConnection.connect();
             int status = urlConnection.getResponseCode();
 
-            switch (status) {
-                case 200:
-                case 201:
-                    inputStream = url.openStream();
+            if (status == 200 || status == 201) {
+                inputStream = url.openStream();
 
-                    Gson gson = new Gson();
-                    Reader reader = new InputStreamReader(inputStream);
-                    results = gson.fromJson(reader, Results.class);
+                Gson gson = new Gson();
+                Reader reader = new InputStreamReader(inputStream);
+                results = gson.fromJson(reader, Results.class);
 
-                    getImages(results);
+                getImages(results);
+            } else {
+                String error = context.getResources().getString(R.string.search_error);
+                activity.changeSearchMessage(error);
             }
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -133,20 +138,21 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     private void populateResultList(Results results) {
         adapter = new CustomAdapter(context, R.layout.listview_search_item, results.getRepos());
         listView.setAdapter(adapter);
+        activity.hideSearchMessage();
+        activity.setNumberOfResults(results.getRepos().size());
     }
 
     private void generateNotification(int numberResults) {
-        String title = "Search Complete";
-        String body = numberResults + " Results Retrieved";
-        String subject = "Code Search";
+        String title = context.getResources().getString(R.string.search_complete);
+        String body = numberResults + " " + context.getResources().getString(R.string.results_fetched);
+        String subject = context.getResources().getString(R.string.app_name);
 
-        NotificationManager notif = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notify= new Notification.Builder(context).setContentTitle(title)
+        NotificationManager notification = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notify = new Notification.Builder(context).setContentTitle(title)
                                     .setContentText(body).setContentTitle(subject)
                                         .setSmallIcon(R.drawable.ic_github_white).build();
 
         notify.flags |= Notification.FLAG_AUTO_CANCEL;
-        notif.notify(0, notify);
+        notification.notify(0, notify);
     }
-
 }

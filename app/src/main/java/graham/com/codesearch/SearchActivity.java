@@ -1,7 +1,10 @@
 package graham.com.codesearch;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -12,6 +15,9 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import graham.com.codesearch.search.SuggestionProvider;
 import graham.com.codesearch.search.model.Repo;
 import graham.com.codesearch.search.SearchFetcher;
 
@@ -20,6 +26,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     private ListView listView;
     private SearchView searchView;
     private Menu menu;
+    private TextView searchMessage;
+    private TextView numberOfResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listView = (ListView) findViewById(R.id.listView);
+        searchMessage = (TextView) findViewById(R.id.searchMessage);
+        numberOfResults = (TextView) findViewById(R.id.numberOfResults);
     }
 
     @Override
@@ -40,9 +50,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         //Search View Menu Inflation
         getMenuInflater().inflate(R.menu.search_menu, menu);
 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.searchView);
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
+
 
         //Search Repo Menu Inflation
         getMenuInflater().inflate(R.menu.list_menu, menu);
@@ -77,7 +91,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         setupListViewItemClick();
         searchView.clearFocus();
 
-        SearchFetcher fetcher = new SearchFetcher(this, listView);
+        SearchFetcher fetcher = new SearchFetcher(this, this, listView);
         fetcher.execute(query);
 
         return false;
@@ -87,6 +101,19 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     public boolean onQueryTextChange(String newText) {
 
         return false;
+    }
+
+    public void hideSearchMessage() {
+        searchMessage.setText("");
+    }
+
+    public void changeSearchMessage(String text){
+        searchMessage.setText(text);
+    }
+
+    public void setNumberOfResults(int resultCount) {
+        String text = resultCount + " " + getResources().getString(R.string.result_count);
+        numberOfResults.setText(text);
     }
 
     public void setupListViewItemClick() {
@@ -101,4 +128,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         });
     }
 
+    private void saveSuggestion(String query) {
+        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getApplicationContext(), SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+        suggestions.saveRecentQuery(query, null);
+    }
+
+    private void clearHistory() {
+        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+        suggestions.clearHistory();
+    }
 }

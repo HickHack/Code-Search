@@ -15,4 +15,15 @@
     <string name="title_activity_browser">Browser</string>
     <string name="created">Created:</string>
     <string name="message_body" formatted="false">Hey, I found an awesome repository on Code Search called %s. You should check it out at %s</string>
+    <string name="search_hint">Search Github</string>
+    <string name="x13504987_student_ncirl_ie">x13504987@student.ncirl.ie</string>
+    <string name="nav_location">Location</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_share">Share</string>
+    <string name="share_message">Hey, I found a cool app called Code Search check it out!</string>
+    <string name="search_complete">Search Complete</string>
+    <string name="results_fetched">Results Retrieved</string>
+    <string name="result_count">Results</string>
+    <string name="search_error">Unable to get Results</string>
+    <string name="search">Search</string>
 </resources>

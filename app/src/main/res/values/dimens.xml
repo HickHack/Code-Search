@@ -13,4 +13,5 @@
     <dimen name="line_margin_top">10sp</dimen>
     <dimen name="description_margin">10sp</dimen>
     <dimen name="line_margin">2sp</dimen>
+    <dimen name="results_count_margin_bottom">10sp</dimen>
 </resources>

@@ -22,10 +22,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search_result"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable">
+            </meta-data>
+        </activity>
+
         <activity
             android:name=".ResultActivity"
             android:label="@string/title_activity_result"
@@ -34,6 +48,9 @@
             android:name=".BrowserActivity"
             android:label="@string/title_activity_browser"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <provider android:name=".search.SuggestionProvider"
+            android:authorities="graham.com.codesearch.search.SuggestionProvider" />
     </application>
 
 </manifest>
