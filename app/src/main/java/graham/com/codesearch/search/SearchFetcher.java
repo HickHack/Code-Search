@@ -35,7 +35,7 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     private Context context;
     private SearchActivity activity;
     private ListView listView;
-    private CustomAdapter adapter;
+    private SearchAdapter adapter;
 
     public SearchFetcher(Context context, SearchActivity activity, ListView listView) {
         this.context = context;
@@ -136,7 +136,7 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     }
 
     private void populateResultList(Results results) {
-        adapter = new CustomAdapter(context, R.layout.listview_search_item, results.getRepos());
+        adapter = new SearchAdapter(context, R.layout.listview_search_item, results.getRepos());
         listView.setAdapter(adapter);
         activity.hideSearchMessage();
         activity.setNumberOfResults(results.getRepos().size());

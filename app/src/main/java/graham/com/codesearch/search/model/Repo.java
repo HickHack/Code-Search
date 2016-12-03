@@ -19,9 +19,12 @@ public class Repo implements Serializable {
     @SerializedName("updated_at")
     private String updated;
 
+    private int watchers;
+
     private Owner owner;
     private String name;
     private String description;
+    private String language;
 
     public String getName() {
         return name;
@@ -41,6 +44,14 @@ public class Repo implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public int getWatchers() {
+        return watchers;
     }
 
     public Owner getOwner() {

@@ -15,11 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import graham.com.codesearch.location.GPSTracker;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                launchMap();
             }
         });
     }
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_search) {
             search();
         } else if (id == R.id.nav_location) {
-
+            launchMap();
         } else if (id == R.id.nav_share) {
             share();
         }
@@ -129,6 +125,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void search() {
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
         startActivity(intent);
+    }
+
+    private void launchMap() {
+        Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
+        startActivity(mapsIntent);
     }
 
     public void share() {

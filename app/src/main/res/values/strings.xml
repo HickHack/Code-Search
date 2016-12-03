@@ -26,4 +26,11 @@
     <string name="result_count">Results</string>
     <string name="search_error">Unable to get Results</string>
     <string name="search">Search</string>
+    <string name="homepage">Homepage</string>
+    <string name="na">NA</string>
+    <string name="watchers">Watchers:</string>
+    <string name="zero_default">0</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="location_error">Please enable location</string>
+    <string name="language">Language:</string>
 </resources>

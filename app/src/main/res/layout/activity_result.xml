@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:layoutAnimation = "@anim/layout_animation"
     tools:context="graham.com.codesearch.ResultActivity">
+    <!--android:layoutAnimation = "@anim/layout_animation"-->
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

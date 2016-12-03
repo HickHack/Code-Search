@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import graham.com.codesearch.search.model.Repo;
 
 public class ResultActivity extends AppCompatActivity {
@@ -23,6 +25,9 @@ public class ResultActivity extends AppCompatActivity {
     private TextView repoOwnerTextView;
     private TextView createdTextView;
     private TextView updatedTextView;
+    private TextView watchersTextView;
+    private TextView languageTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class ResultActivity extends AppCompatActivity {
             setupOwnerNameTextView();
             setupCreatedTextView();
             setupUpdatedTextView();
+            setupWatchersTextView();
+            setupLanguageTextView();
             configureBrowserFab();
             configureMessageFab();
         }
@@ -89,6 +96,16 @@ public class ResultActivity extends AppCompatActivity {
         updatedTextView.setText(result.getUpdated());
     }
 
+    private void setupWatchersTextView() {
+        watchersTextView = (TextView) findViewById(R.id.watchers);
+        watchersTextView.setText(String.valueOf(result.getWatchers()));
+    }
+
+    private void setupLanguageTextView() {
+        languageTextView = (TextView) findViewById(R.id.language);
+        languageTextView.setText(result.getLanguage());
+    }
+
     private void configureBrowserFab() {
         FloatingActionButton fabBrowser = (FloatingActionButton) findViewById(R.id.fabBrowser);
         fabBrowser.setOnClickListener(new View.OnClickListener() {
@@ -127,5 +144,4 @@ public class ResultActivity extends AppCompatActivity {
 
         return String.format(body, result.getName(), result.getProfileUrl());
     }
-
 }

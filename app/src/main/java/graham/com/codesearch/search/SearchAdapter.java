@@ -21,14 +21,14 @@ import graham.com.codesearch.search.model.Repo;
  * Created by Graham Murray on 16/11/16.
  */
 
-public class CustomAdapter extends ArrayAdapter<Repo> implements ListAdapter {
+public class SearchAdapter extends ArrayAdapter<Repo> implements ListAdapter {
 
     private List<Repo> resultList;
     private Context context;
     private TextView nameTextView;
     private ImageView imageView;
 
-    public CustomAdapter(Context context, int resId, List<Repo> resultList) {
+    public SearchAdapter(Context context, int resId, List<Repo> resultList) {
         super(context, resId, resultList);
 
         this.resultList = resultList;
