@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="540"
+    android:viewportHeight="1000"
+    android:width="540dp"
+    android:height="1000dp">
+    <path
+        android:pathData="M540 344.5c0 103.75 -80 205 -132.5 281.25C295 787 278.75 923.25 278.75 923.25c-2.5 11.25 -12.5 11.25 -15 0 0 0 -21.25 -136.25 -131.25 -297.5C41.25 498.25 0 448.25 0 344.5 0 195.75 118.75 77 268.75 77 417.5 77 540 195.75 540 344.5ZM271.25 455.75C330 455.75 375 407 375 349.5 375 292 330 247 271.25 247 216.25 247 170 292 170 349.5c0 57.5 46.25 106.25 101.25 106.25z"
+        android:fillColor="#000000" />
+</vector>

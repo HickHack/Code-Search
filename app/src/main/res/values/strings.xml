@@ -6,9 +6,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_search_result">Search</string>
-    <string name="view_location">View Location</string>
     <string name="title_activity_result">Result</string>
-    <string name="placeholder">This is a placeholder</string>
+    <string name="placeholder"></string>
     <string name="owner">Owner:</string>
     <string name="updated">Updated:</string>
     <string name="title_activity_web_view">WebView</string>
@@ -33,4 +32,17 @@
     <string name="title_activity_maps">Map</string>
     <string name="location_error">Please enable location</string>
     <string name="language">Language:</string>
+    <string name="repo_key_owner">Owner:</string>
+    <string name="repo_key_created">Created:</string>
+    <string name="repo_key_language">Language:</string>
+    <string name="repo_key_updated">Updated:</string>
+    <string name="repo_key_watchers">Watchers:</string>
+    <string name="repo_key_open_issues">Open Issues:</string>
+    <string name="repo_key_forks">Forks:</string>
+    <string name="notification_title">Github Search Retrieval</string>
+    <string name="notification_message">Fetching Results...</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="main_description">Code Search is an application that allows you to search GitHub
+        for repositories and explore them in more depth without having to leave the application.
+        Why not take a look around and search for some awesome repositories you may find useful</string>
 </resources>

@@ -4,5 +4,6 @@
     android:label="@string/app_name"
     android:hint="@string/search_hint"
     android:searchSuggestAuthority="graham.com.codesearch.search.SuggestionProvider"
-    android:searchSuggestSelection=" ?" >
+    android:searchSuggestSelection=" ?"
+    android:searchSuggestIntentAction="android.intent.action.VIEW" >
 </searchable>

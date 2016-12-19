@@ -6,11 +6,6 @@
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_black"
             android:title="@string/nav_search" />
-        <item
-            android:id="@+id/nav_location"
-            android:icon="@drawable/ic_github_black"
-            android:title="@string/nav_location" />
-
     </group>
 
     <item android:title="Communicate">

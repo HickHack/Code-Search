@@ -6,21 +6,22 @@ import java.io.Serializable;
 
 /**
  * Created by Graham Murray on 11/11/16.
+ * POJO to store the data associated with
+ * a repository
  */
 
 public class Repo implements Serializable {
 
     @SerializedName("html_url")
     private String profileUrl;
-
     @SerializedName("created_at")
     private String created;
-
     @SerializedName("updated_at")
     private String updated;
-
+    @SerializedName("open_issues_count")
+    private int openIssueCount;
     private int watchers;
-
+    private int forks;
     private Owner owner;
     private String name;
     private String description;
@@ -52,6 +53,14 @@ public class Repo implements Serializable {
 
     public int getWatchers() {
         return watchers;
+    }
+
+    public int getOpenIssueCount() {
+        return openIssueCount;
+    }
+
+    public int getForks() {
+        return forks;
     }
 
     public Owner getOwner() {

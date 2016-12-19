@@ -5,23 +5,27 @@
     android:id="@+id/content_search_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layoutAnimation="@anim/layout_animation"
     tools:context="graham.com.codesearch.SearchActivity"
     tools:showIn="@layout/activity_search">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/numberOfResults"
+        android:layout_marginTop="@dimen/results_count_margin"
+        android:layout_marginBottom="@dimen/results_count_margin"
         android:gravity="center_horizontal" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
-        android:layout_marginTop="@dimen/results_count_margin_bottom"
+        android:layout_below="@+id/numberOfResults"
+        android:layout_marginTop="@dimen/results_count_margin"
         android:layoutAnimation="@anim/layout_animation"/>
 
 </RelativeLayout>

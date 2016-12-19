@@ -13,5 +13,11 @@
     <dimen name="line_margin_top">10sp</dimen>
     <dimen name="description_margin">10sp</dimen>
     <dimen name="line_margin">2sp</dimen>
-    <dimen name="results_count_margin_bottom">10sp</dimen>
+    <dimen name="results_count_margin">4sp</dimen>
+    <dimen name="repo_listview_margin">20dp</dimen>
+    <dimen name="repo_listview_margin_left_right">20sp</dimen>
+    <dimen name="main_button_height_width">120dp</dimen>
+    <dimen name="main_margin">20dp</dimen>
+    <dimen name="main_logo_margin_top">60sp</dimen>
+    <dimen name="result_description_height">80sp</dimen>
 </resources>

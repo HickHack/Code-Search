@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_result"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="graham.com.codesearch.ResultActivity"
-    tools:showIn="@layout/activity_result">
+    tools:showIn="@layout/activity_result"
+    android:baselineAligned="false">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="1"
-        android:orientation="vertical">
 
         <!-- Repo Name -->
         <TextView
             android:text="@string/placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:id="@+id/repoName" />
 
@@ -32,193 +28,36 @@
             android:layout_width="80sp"
             android:layout_height="80sp"
             app:srcCompat="@mipmap/ic_launcher"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:id="@+id/projectImage"
-            android:layout_weight="0.05" />
+            android:id="@+id/projectImage" />
 
-
-        <!-- Description -->
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/repoDescription"
-            android:paddingLeft="@dimen/description_margin"
-            android:paddingRight="@dimen/description_margin"
-            android:text="@string/placeholder"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/table_row_margin"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_weight="0.05"/>
+            android:layout_height="@dimen/result_description_height"
+            android:layout_marginTop="@dimen/main_margin"
+            android:layout_marginBottom="@dimen/table_row_margin">
 
-        <!-- Owner Name -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_horizontal_margin">
-
+            <!-- Description -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ownerNameTitle"
-                android:layout_weight="0.05"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/owner"/>
-
-
-            <TextView
+                android:id="@+id/repoDescription"
+                android:paddingLeft="@dimen/description_margin"
+                android:paddingRight="@dimen/description_margin"
                 android:text="@string/placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginLeft="@dimen/text_margin"
-                android:id="@+id/ownerName" />
-        </LinearLayout>
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </ScrollView>
 
-        <View
-            android:layout_width="@dimen/line_width"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginBottom="@dimen/line_margin_top"
-            android:background="@android:color/darker_gray"/>
-
-        <!-- Created -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/repo_listview_margin"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/createdTitle"
-                android:layout_weight="0.05"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold"
-                android:text="@string/created" />
-
-
-
-            <TextView
-                android:text="@string/placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/created" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/line_width"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginBottom="@dimen/line_margin_top"
-            android:background="@android:color/darker_gray"/>
-
-        <!-- Last Updated -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lastUpdateTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="0.05"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textStyle="bold"
-                android:text="@string/updated" />
-
-
-
-            <TextView
-                android:text="@string/placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginRight="@dimen/text_margin"
-                android:id="@+id/lastUpdated" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/line_width"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/line_margin_top"
-            android:background="@android:color/darker_gray"/>
-
-        <!-- Language-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/languageTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="0.05"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textStyle="bold"
-                android:text="@string/language" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginRight="@dimen/text_margin"
-                android:id="@+id/language" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/line_width"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/line_margin"
-            android:layout_marginBottom="@dimen/line_margin"
-            android:background="@android:color/darker_gray"/>
-
-        <!-- Watchers -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/watchersTitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="0.05"
-                android:layout_marginRight="@dimen/text_margin"
-                android:textStyle="bold"
-                android:text="@string/watchers" />
-
-            <TextView
-                android:text="@string/zero_default"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_marginRight="@dimen/text_margin"
-                android:id="@+id/watchers" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="@dimen/line_width"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/line_margin"
-            android:background="@android:color/darker_gray"/>
-
-    </LinearLayout>
-
-</ScrollView>
+            android:layoutAnimation = "@anim/layout_animation"
+            android:layout_marginLeft="@dimen/repo_listview_margin_left_right"
+            android:layout_marginRight="@dimen/repo_listview_margin_left_right"
+            android:id="@+id/repoListView">
+        </ListView>
+</LinearLayout>

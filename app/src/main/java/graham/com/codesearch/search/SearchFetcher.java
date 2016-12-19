@@ -24,6 +24,9 @@ import graham.com.codesearch.search.model.Results;
 
 /**
  * Created by Graham Murray on 16/11/16.
+ * Async task for fetching the search results
+ * for a query from the Github API along with the
+ * cover image for each repository.
  */
 
 public class SearchFetcher extends AsyncTask<String, Void, Results> {
@@ -47,16 +50,21 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     protected void onPreExecute() {
         super.onPreExecute();
 
+        //Setup and show the progress dialog
         progress = new ProgressDialog(context);
-        progress.setTitle("Github Search Retrieval");
-        progress.setMessage("Fetching Results...");
+        progress.setTitle(context.getString(R.string.notification_title));
+        progress.setMessage(context.getString(R.string.notification_message));
         progress.show();
     }
 
     @Override
     protected void onPostExecute(Results results) {
         super.onPostExecute(results);
+
+        //Show the notification
         generateNotification(results.getRepos().size());
+
+        //Hide the progress dialog
         progress.dismiss();
         populateResultList(results);
     }
@@ -77,14 +85,18 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
             int status = urlConnection.getResponseCode();
 
             if (status == 200 || status == 201) {
+                //If the HTTP status code is OK open the stream and deserialise the response
                 inputStream = url.openStream();
 
+                //Deserialise the response
                 Gson gson = new Gson();
                 Reader reader = new InputStreamReader(inputStream);
                 results = gson.fromJson(reader, Results.class);
 
+                //Fetch the images for each repo
                 getImages(results);
             } else {
+                //Show an error if the request fails
                 String error = context.getResources().getString(R.string.search_error);
                 activity.changeSearchMessage(error);
             }
@@ -107,6 +119,8 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     private void getImages(Results results) {
         int counter = 0;
         for (Repo tmp: results.getRepos()) {
+            //Store the images in a byte array as there was problems
+            //passing a Bitmap to an intent if the image was too large
             byte[] image = getImage(tmp.getOwner().getAvatarUrl());
 
             if (image != null) {
@@ -121,11 +135,13 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
 
         try {
             if (!link.isEmpty()) {
+                //Fetch the image
                 URL url = new URL(link);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.connect();
 
                 inputStream = url.openStream();
+                //Convert the input stream to a byte array
                 return IOUtils.toByteArray(inputStream);
             }
         } catch (Exception e) {
@@ -136,6 +152,7 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     }
 
     private void populateResultList(Results results) {
+        //Display the result
         adapter = new SearchAdapter(context, R.layout.listview_search_item, results.getRepos());
         listView.setAdapter(adapter);
         activity.hideSearchMessage();
@@ -143,6 +160,7 @@ public class SearchFetcher extends AsyncTask<String, Void, Results> {
     }
 
     private void generateNotification(int numberResults) {
+        //Display a notification with the number of results retrieved
         String title = context.getResources().getString(R.string.search_complete);
         String body = numberResults + " " + context.getResources().getString(R.string.results_fetched);
         String subject = context.getResources().getString(R.string.app_name);

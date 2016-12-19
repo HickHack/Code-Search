@@ -19,6 +19,7 @@ import graham.com.codesearch.search.model.Repo;
 
 /**
  * Created by Graham Murray on 16/11/16.
+ * Custom list adapter used in the search activity
  */
 
 public class SearchAdapter extends ArrayAdapter<Repo> implements ListAdapter {
@@ -57,6 +58,7 @@ public class SearchAdapter extends ArrayAdapter<Repo> implements ListAdapter {
         byte[] imageArray = resultList.get(position).getOwner().getImage();
 
         if (imageArray != null) {
+            //Decode the byte array and set the result image
             Bitmap bmp = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.length);
             imageView.setImageBitmap(bmp);
             nameTextView.invalidate();
@@ -69,6 +71,7 @@ public class SearchAdapter extends ArrayAdapter<Repo> implements ListAdapter {
 
         if (!name.isEmpty()) {
             if (name.length() > 20) {
+                //Trim the text if it's too long
                 name = name.substring(0, Math.min(name.length(), 20)) + "...";
             }
 

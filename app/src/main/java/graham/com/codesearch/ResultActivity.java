@@ -6,51 +6,55 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.HashMap;
+import java.util.Map;
 
+import graham.com.codesearch.search.RepoMapAdapter;
 import graham.com.codesearch.search.model.Repo;
 
+/**
+ * Results activity that is used to display and
+ * an individual search item from the search activity
+ */
 public class ResultActivity extends AppCompatActivity {
 
     private Repo result;
-    private TextView descriptionTextView;
-    private TextView repoNameTextView;
-    private TextView repoOwnerTextView;
-    private TextView createdTextView;
-    private TextView updatedTextView;
-    private TextView watchersTextView;
-    private TextView languageTextView;
-
+    private RepoMapAdapter adapter;
+    private Map<String, String> repoData;
+    private ListView listView;
+    private TextView description;
+    private TextView repoName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        //Configure the action bar so it has a back button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        repoData = new HashMap<>();
 
+        //Get the result item sent from the search activity
         Repo result = (Repo) getIntent().getSerializableExtra("result");
 
         if (result != null) {
             this.result = result;
 
+            populateRepoItems();
+            setupRepoName();
             setupImage();
-            setupDescriptionTextView();
-            setupRepoNameTextView();
-            setupOwnerNameTextView();
-            setupCreatedTextView();
-            setupUpdatedTextView();
-            setupWatchersTextView();
-            setupLanguageTextView();
+            setupDescription();
+            configureListView();
             configureBrowserFab();
             configureMessageFab();
         }
@@ -65,48 +69,45 @@ public class ResultActivity extends AppCompatActivity {
 
     private void setupImage() {
         ImageView projectImage = (ImageView) findViewById(R.id.projectImage);
+
         if (result.getOwner().getImage() != null) {
+            //Get the image byte array and decode it
             byte[] imageArray = result.getOwner().getImage();
             Bitmap bmp = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.length);
             projectImage.setImageBitmap(bmp);
         }
     }
 
-    private void setupDescriptionTextView() {
-        descriptionTextView = (TextView) findViewById(R.id.repoDescription);
-        descriptionTextView.setText(result.getDescription());
+    private void setupDescription() {
+        description = (TextView) findViewById(R.id.repoDescription);
+        description.setText(result.getDescription());
     }
 
-    private void setupRepoNameTextView() {
-        repoNameTextView = (TextView) findViewById(R.id.repoName);
-        repoNameTextView.setText(result.getName());
+    private void setupRepoName() {
+        repoName = (TextView) findViewById(R.id.repoName);
+        repoName.setText(result.getName());
     }
 
-    private void setupOwnerNameTextView() {
-        repoOwnerTextView = (TextView) findViewById(R.id.ownerName);
-        repoOwnerTextView.setText(result.getOwner().getUsername());
+    private void configureListView() {
+        listView = (ListView) findViewById(R.id.repoListView);
+
+        adapter = new RepoMapAdapter(this, repoData);
+        listView.setAdapter(adapter);
     }
 
-    private void setupCreatedTextView() {
-        createdTextView = (TextView) findViewById(R.id.created);
-        createdTextView.setText(result.getCreated());
-    }
-    private void setupUpdatedTextView() {
-        updatedTextView = (TextView) findViewById(R.id.lastUpdated);
-        updatedTextView.setText(result.getUpdated());
-    }
-
-    private void setupWatchersTextView() {
-        watchersTextView = (TextView) findViewById(R.id.watchers);
-        watchersTextView.setText(String.valueOf(result.getWatchers()));
-    }
-
-    private void setupLanguageTextView() {
-        languageTextView = (TextView) findViewById(R.id.language);
-        languageTextView.setText(result.getLanguage());
+    private void populateRepoItems() {
+        //Add the result items to a map
+        repoData.put(getString(R.string.repo_key_owner), result.getOwner().getUsername());
+        repoData.put(getString(R.string.repo_key_created), result.getCreated());
+        repoData.put(getString(R.string.repo_key_updated), result.getUpdated());
+        repoData.put(getString(R.string.repo_key_watchers), String.valueOf(result.getWatchers()));
+        repoData.put(getString(R.string.repo_key_language), result.getLanguage());
+        repoData.put(getString(R.string.repo_key_open_issues), String.valueOf(result.getOpenIssueCount()));
+        repoData.put(getString(R.string.repo_key_forks), String.valueOf(result.getForks()));
     }
 
     private void configureBrowserFab() {
+        //Setup the floating action button used to launch the web view
         FloatingActionButton fabBrowser = (FloatingActionButton) findViewById(R.id.fabBrowser);
         fabBrowser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +118,14 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void launchBrowser() {
+        //Launch the browser activity and pass over the repo url
         Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
         intent.putExtra("url", result.getProfileUrl());
         startActivity(intent);
     }
 
     private void configureMessageFab() {
+        //Setup the floating action button for sending a message to a friend
         FloatingActionButton fabText = (FloatingActionButton) findViewById(R.id.fabText);
         fabText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +136,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void launchMessageService() {
+        //Launch the implicit intent for sending an SMSs
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
         sendIntent.setData(Uri.parse("sms:"));
         sendIntent.putExtra("sms_body", getMessageBody());
@@ -140,7 +144,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private String getMessageBody() {
-        String body = getResources().getString(R.string.message_body);
+        String body = getString(R.string.message_body);
 
         return String.format(body, result.getName(), result.getProfileUrl());
     }

@@ -3,29 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
 
-    <Button
+    <ImageView
+        android:layout_width="@dimen/main_button_height_width"
+        android:layout_height="@dimen/main_button_height_width"
+        android:layout_marginTop="@dimen/main_logo_margin_top"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/ic_logo_black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="@dimen/main_margin"
+        android:layout_marginRight="@dimen/main_margin"
+        android:layout_marginBottom="@dimen/main_margin"
+        android:text="@string/main_description"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/locationButton"
-        android:text="@string/view_location"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-    <ImageButton
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/ic_github_black"
-        android:scaleType="fitCenter"
-        android:id="@+id/codeSearch" />
-
-    <ImageButton
-        android:layout_width="300dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/sendText" />
+        <ImageButton
+            android:layout_width="@dimen/main_button_height_width"
+            android:layout_height="@dimen/main_button_height_width"
+            android:layout_marginBottom="@dimen/main_margin"
+            android:layout_marginTop="@dimen/main_margin"
+            app:srcCompat="@drawable/ic_github_black"
+            android:scaleType="fitCenter"
+            android:id="@+id/codeSearch" />
+    </LinearLayout>
 </LinearLayout>

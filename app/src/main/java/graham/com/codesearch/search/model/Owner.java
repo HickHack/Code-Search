@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * Created by Graham Murray on 18/11/16.
+ * POJO to store a repository owner
  */
 
 public class Owner implements Serializable {

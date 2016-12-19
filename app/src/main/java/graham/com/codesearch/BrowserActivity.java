@@ -1,12 +1,14 @@
 package graham.com.codesearch;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * @author Graham Murray
+ */
 public class BrowserActivity extends AppCompatActivity {
 
     private WebView browser;
@@ -20,6 +22,7 @@ public class BrowserActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_close);
         setSupportActionBar(toolbar);
 
+        //Get the url
         this.url = (String) getIntent().getExtras().get("url");
 
         configureBrowser();

@@ -33,19 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        configureLocationButton();
         configureSearchLaunchButton();
         configureShareFab();
-    }
-
-    public void configureLocationButton() {
-        Button button = (Button) findViewById(R.id.locationButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchMap();
-            }
-        });
     }
 
     public void configureSearchLaunchButton() {
@@ -100,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_search) {
             search();
-        } else if (id == R.id.nav_location) {
-            launchMap();
         } else if (id == R.id.nav_share) {
             share();
         }
@@ -121,18 +108,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
     public void search() {
+        //Launch the search activity
         Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
         startActivity(intent);
     }
 
-    private void launchMap() {
-        Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(mapsIntent);
-    }
-
     public void share() {
+        //Launch the share intent
         Intent sendIntent = new Intent();
 
         sendIntent.setAction(Intent.ACTION_SEND);
