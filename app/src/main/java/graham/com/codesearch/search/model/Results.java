@@ -7,7 +7,9 @@ import java.util.List;
 
 /**
  * Created by Graham Murray on 17/11/16.
- * Object to encapsulate the results items
+ *
+ * Object to encapsulate a list of result
+ * items
  */
 
 public class Results {
